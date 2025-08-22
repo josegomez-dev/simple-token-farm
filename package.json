@@ -5,15 +5,17 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.js"
+    "deploy": "hardhat run scripts/deploy.js",
+    "gas": "REPORT_GAS=true hardhat test",
+    "coverage": "hardhat coverage"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["defi", "yield-farming", "solidity", "ethereum", "staking", "rewards"],
+  "author": "Jose Alejandro Gomez Castro",
+  "license": "MIT",
+  "description": "Advanced DeFi Yield Farming with proportional rewards, upgradeable contracts, and gas-efficient factory patterns",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.10"
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.2"
