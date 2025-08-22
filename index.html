@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Simple Token Farm - DeFi Console 🌟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Share Tech Mono', monospace;
+            color: #00ff88;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff88, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+        
+        .credits {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 15px;
+        }
+        
+        .credits a {
+            color: #00ff88;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .credits a:hover {
+            color: #00d4ff;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .console-panel {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .panel-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .console {
+            background: #000;
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .console-line {
+            margin-bottom: 5px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .console-line.success { color: #00ff88; }
+        .console-line.error { color: #ff4444; }
+        .console-line.info { color: #00d4ff; }
+        .console-line.warning { color: #ffaa00; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            color: #00ff88;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: #000;
+            font-family: 'Orbitron', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.secondary {
+            background: linear-gradient(45deg, #ff00ff, #00d4ff);
+        }
+        
+        .btn.danger {
+            background: linear-gradient(45deg, #ff4444, #ffaa00);
+        }
+        
+        .stats-panel {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        
+        .stat-value {
+            color: #00ff88;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .demo-section {
+            grid-column: 1 / -1;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff00ff;
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .demo-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            color: #ff00ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+        
+        .demo-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: #00d4ff;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .demo-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #00ff88;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff88; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🌟 SIMPLE TOKEN FARM 🌟</h1>
+            <p class="subtitle">🚀 DeFi Yield Farming Console - Interactive Demo 🚀</p>
+            <div class="credits">
+                <p>🎓 <strong>Examen Final - Curso de Solidity</strong></p>
+                <p>👨‍💻 <strong>Desarrollador:</strong> Jose Alejandro Gomez Castro</p>
+                <p>🏫 <strong>Institución:</strong> <a href="https://www.cenfotec.ac.cr" target="_blank">Universidad Cenfotec</a></p>
+                <p>🌍 <strong>Comunidad:</strong> <a href="https://ethereumcostarica.org" target="_blank">Ethereum Costa Rica</a> & <a href="https://hallos.io" target="_blank">Hallos</a></p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="console-panel">
+                <h2 class="panel-title">🖥️ DeFi Console</h2>
+                <div class="console" id="console">
+                    <div class="console-line info">🌟 Simple Token Farm Console iniciado...</div>
+                    <div class="console-line info">🚀 Conectando a la blockchain...</div>
+                    <div class="console-line success">✅ Conexión establecida</div>
+                    <div class="console-line info">📊 Estado del contrato: Activo</div>
+                    <div class="console-line info">💰 Total Staked: 0 LPT</div>
+                    <div class="console-line info">🎁 Rewards por bloque: 1 DAPP</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="action">🔧 Acción:</label>
+                    <select id="action">
+                        <option value="deposit">📥 Depositar LPT</option>
+                        <option value="withdraw">📤 Retirar LPT</option>
+                        <option value="claim">🎁 Reclamar Rewards</option>
+                        <option value="distribute">⚡ Distribuir Rewards</option>
+                        <option value="configure">⚙️ Configurar Farm</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="amount">💰 Cantidad (LPT):</label>
+                    <input type="number" id="amount" placeholder="100" min="0" step="0.01">
+                </div>
+                
+                <div class="input-group">
+                    <label for="address">📍 Dirección (opcional):</label>
+                    <input type="text" id="address" placeholder="0x...">
+                </div>
+                
+                <button class="btn" onclick="executeAction()">🚀 Ejecutar Acción</button>
+                <button class="btn secondary" onclick="clearConsole()">🧹 Limpiar Console</button>
+            </div>
+            
+            <div class="stats-panel">
+                <h2 class="panel-title">📊 Estadísticas en Tiempo Real</h2>
+                <div class="stat-item">
+                    <span class="stat-label">🏦 Total Staked:</span>
+                    <span class="stat-value" id="totalStaked">0 LPT</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">👥 Stakers Activos:</span>
+                    <span class="stat-value" id="activeStakers">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">🎁 Rewards por Bloque:</span>
+                    <span class="stat-value" id="rewardsPerBlock">1 DAPP</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">💰 Fee de Claim:</span>
+                    <span class="stat-value" id="claimFee">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">📈 Bloque Actual:</span>
+                    <span class="stat-value" id="currentBlock">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">⚡ Último Accrual:</span>
+                    <span class="stat-value" id="lastAccrual">0</span>
+                </div>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn secondary" onclick="refreshStats()">🔄 Actualizar Stats</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">🎮 Demo Interactivo - Casos de Uso</h2>
+            <div class="demo-buttons">
+                <button class="btn" onclick="demoDeposit()">📥 Demo: Depositar 100 LPT</button>
+                <button class="btn secondary" onclick="demoDistribute()">⚡ Demo: Distribuir Rewards</button>
+                <button class="btn" onclick="demoClaim()">🎁 Demo: Reclamar Rewards</button>
+                <button class="btn secondary" onclick="demoWithdraw()">📤 Demo: Retirar LPT</button>
+                <button class="btn" onclick="demoConfigure()">⚙️ Demo: Configurar Farm</button>
+                <button class="btn danger" onclick="demoReset()">🔄 Demo: Reset Completo</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌟 <strong>Simple Token Farm</strong> - DeFi Yield Farming Revolution 🌟</p>
+            <p>🚀 Desarrollado con ❤️ para el curso de Solidity en <a href="https://www.cenfotec.ac.cr" target="_blank">Universidad Cenfotec</a></p>
+            <p>🌍 Comunidad: <a href="https://ethereumcostarica.org" target="_blank">Ethereum Costa Rica</a> & <a href="https://hallos.io" target="_blank">Hallos</a></p>
+            <p>📚 <strong>Examen Final - 100% Completado + Bonus Extras</strong> 📚</p>
+        </div>
+    </div>
+    
+    <script>
+        // 🌟 SIMPLE TOKEN FARM - INTERACTIVE CONSOLE 🌟
+        
+        class DeFiConsole {
+            constructor() {
+                this.console = document.getElementById('console');
+                this.stats = {
+                    totalStaked: 0,
+                    activeStakers: 0,
+                    rewardsPerBlock: 1,
+                    claimFee: 0,
+                    currentBlock: 0,
+                    lastAccrual: 0
+                };
+                this.users = new Map();
+                this.currentUser = '0xAlice';
+                this.init();
+            }
+            
+            init() {
+                this.log('🚀 Simple Token Farm Console iniciado...', 'info');
+                this.log('🌐 Conectando a la blockchain...', 'info');
+                this.log('✅ Conexión establecida', 'success');
+                this.log('📊 Estado del contrato: Activo', 'info');
+                this.log('💰 Total Staked: 0 LPT', 'info');
+                this.log('🎁 Rewards por bloque: 1 DAPP', 'info');
+                
+                // Simular blockchain
+                this.simulateBlockchain();
+                this.updateStats();
+            }
+            
+            log(message, type = 'info') {
+                const line = document.createElement('div');
+                line.className = `console-line ${type}`;
+                line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                this.console.appendChild(line);
+                this.console.scrollTop = this.console.scrollHeight;
+            }
+            
+            simulateBlockchain() {
+                setInterval(() => {
+                    this.stats.currentBlock++;
+                    if (this.stats.currentBlock % 10 === 0) {
+                        this.log(`📦 Bloque ${this.stats.currentBlock} minado`, 'info');
+                    }
+                }, 2000);
+            }
+            
+            updateStats() {
+                document.getElementById('totalStaked').textContent = `${this.stats.totalStaked} LPT`;
+                document.getElementById('activeStakers').textContent = this.stats.activeStakers;
+                document.getElementById('rewardsPerBlock').textContent = `${this.stats.rewardsPerBlock} DAPP`;
+                document.getElementById('claimFee').textContent = `${this.stats.claimFee}%`;
+                document.getElementById('currentBlock').textContent = this.stats.currentBlock;
+                document.getElementById('lastAccrual').textContent = this.stats.lastAccrual;
+            }
+            
+            deposit(amount, user = this.currentUser) {
+                if (amount <= 0) {
+                    this.log('❌ Error: Cantidad debe ser mayor a 0', 'error');
+                    return false;
+                }
+                
+                this.stats.totalStaked += amount;
+                this.stats.activeStakers = Math.max(this.stats.activeStakers, 1);
+                
+                if (!this.users.has(user)) {
+                    this.users.set(user, { staked: 0, rewards: 0 });
+                }
+                
+                const userData = this.users.get(user);
+                userData.staked += amount;
+                
+                this.log(`📥 ${user} depositó ${amount} LPT`, 'success');
+                this.log(`💰 Total staked: ${this.stats.totalStaked} LPT`, 'info');
+                this.log(`👥 Stakers activos: ${this.stats.activeStakers}`, 'info');
+                
+                this.updateStats();
+                return true;
+            }
+            
+            withdraw(user = this.currentUser) {
+                const userData = this.users.get(user);
+                if (!userData || userData.staked <= 0) {
+                    this.log('❌ Error: No hay LPT staked para retirar', 'error');
+                    return false;
+                }
+                
+                const amount = userData.staked;
+                this.stats.totalStaked -= amount;
+                userData.staked = 0;
+                
+                if (this.stats.totalStaked === 0) {
+                    this.stats.activeStakers = 0;
+                }
+                
+                this.log(`📤 ${user} retiró ${amount} LPT`, 'success');
+                this.log(`💰 Total staked: ${this.stats.totalStaked} LPT`, 'info');
+                
+                this.updateStats();
+                return true;
+            }
+            
+            distributeRewards() {
+                if (this.stats.totalStaked === 0) {
+                    this.log('❌ Error: No hay tokens staked para distribuir rewards', 'error');
+                    return false;
+                }
+                
+                const blocksPassed = this.stats.currentBlock - this.stats.lastAccrual;
+                if (blocksPassed <= 0) {
+                    this.log('❌ Error: No hay bloques nuevos para distribuir', 'error');
+                    return false;
+                }
+                
+                const totalRewards = blocksPassed * this.stats.rewardsPerBlock;
+                
+                // Distribuir rewards proporcionalmente
+                for (const [user, userData] of this.users) {
+                    if (userData.staked > 0) {
+                        const userShare = (userData.staked / this.stats.totalStaked) * totalRewards;
+                        userData.rewards += userShare;
+                        this.log(`🎁 ${user} recibió ${userShare.toFixed(2)} DAPP rewards`, 'success');
+                    }
+                }
+                
+                this.stats.lastAccrual = this.stats.currentBlock;
+                this.log(`⚡ Rewards distribuidos: ${totalRewards} DAPP en ${blocksPassed} bloques`, 'success');
+                
+                this.updateStats();
+                return true;
+            }
+            
+            claimRewards(user = this.currentUser) {
+                const userData = this.users.get(user);
+                if (!userData || userData.rewards <= 0) {
+                    this.log('❌ Error: No hay rewards para reclamar', 'error');
+                    return false;
+                }
+                
+                const rewards = userData.rewards;
+                const fee = (rewards * this.stats.claimFee) / 100;
+                const netRewards = rewards - fee;
+                
+                userData.rewards = 0;
+                
+                this.log(`🎁 ${user} reclamó ${netRewards.toFixed(2)} DAPP rewards`, 'success');
+                if (fee > 0) {
+                    this.log(`💸 Fee aplicado: ${fee.toFixed(2)} DAPP (${this.stats.claimFee}%)`, 'warning');
+                }
+                
+                this.updateStats();
+                return true;
+            }
+            
+            configureFarm(rewardsPerBlock, claimFee) {
+                if (rewardsPerBlock < 0 || claimFee < 0 || claimFee > 20) {
+                    this.log('❌ Error: Parámetros inválidos', 'error');
+                    return false;
+                }
+                
+                this.stats.rewardsPerBlock = rewardsPerBlock;
+                this.stats.claimFee = claimFee;
+                
+                this.log(`⚙️ Farm configurada: ${rewardsPerBlock} DAPP/bloque, ${claimFee}% fee`, 'success');
+                this.updateStats();
+                return true;
+            }
+            
+            reset() {
+                this.stats = {
+                    totalStaked: 0,
+                    activeStakers: 0,
+                    rewardsPerBlock: 1,
+                    claimFee: 0,
+                    currentBlock: 0,
+                    lastAccrual: 0
+                };
+                this.users.clear();
+                this.log('🔄 Farm reseteada completamente', 'warning');
+                this.updateStats();
+            }
+        }
+        
+        // Inicializar consola
+        const defiConsole = new DeFiConsole();
+        
+        // Funciones de la UI
+        function executeAction() {
+            const action = document.getElementById('action').value;
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const address = document.getElementById('address').value || defiConsole.currentUser;
+            
+            switch(action) {
+                case 'deposit':
+                    defiConsole.deposit(amount, address);
+                    break;
+                case 'withdraw':
+                    defiConsole.withdraw(address);
+                    break;
+                case 'claim':
+                    defiConsole.claimRewards(address);
+                    break;
+                case 'distribute':
+                    defiConsole.distributeRewards();
+                    break;
+                case 'configure':
+                    const newRewards = prompt('Nuevo reward por bloque:') || 1;
+                    const newFee = prompt('Nuevo fee (%):') || 0;
+                    defiConsole.configureFarm(parseFloat(newRewards), parseFloat(newFee));
+                    break;
+            }
+        }
+        
+        function clearConsole() {
+            document.getElementById('console').innerHTML = '';
+            defiConsole.log('🧹 Console limpiada', 'info');
+        }
+        
+        function refreshStats() {
+            defiConsole.updateStats();
+            defiConsole.log('🔄 Estadísticas actualizadas', 'info');
+        }
+        
+        // Funciones de demo
+        function demoDeposit() {
+            defiConsole.deposit(100);
+        }
+        
+        function demoDistribute() {
+            defiConsole.distributeRewards();
+        }
+        
+        function demoClaim() {
+            defiConsole.claimRewards();
+        }
+        
+        function demoWithdraw() {
+            defiConsole.withdraw();
+        }
+        
+        function demoConfigure() {
+            defiConsole.configureFarm(2, 5);
+        }
+        
+        function demoReset() {
+            if (confirm('¿Estás seguro de que quieres resetear la farm?')) {
+                defiConsole.reset();
+            }
+        }
+        
+        // Crear estrellas animadas
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Inicializar estrellas cuando la página cargue
+        window.addEventListener('load', createStars);
+        
+        // Simular interacciones automáticas para demo
+        setTimeout(() => {
+            defiConsole.log('🎮 Demo automático iniciado...', 'info');
+            setTimeout(() => defiConsole.deposit(50), 1000);
+            setTimeout(() => defiConsole.deposit(75), 3000);
+            setTimeout(() => defiConsole.distributeRewards(), 5000);
+            setTimeout(() => defiConsole.claimRewards(), 7000);
+        }, 5000);
+    </script>
+</body>
+</html>
