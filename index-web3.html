@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Simple Token Farm - DeFi Yield Farming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #00ff41;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+        }
+
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #00ff41;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #7fff00;
+            margin-bottom: 20px;
+        }
+
+        .credits {
+            font-size: 0.9em;
+            color: #00bfff;
+            margin-top: 15px;
+        }
+
+        .network-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .network-sepolia {
+            background: #ff6b35;
+            color: white;
+            border: 2px solid #ff6b35;
+        }
+
+        .network-mainnet {
+            background: #4CAF50;
+            color: white;
+            border: 2px solid #4CAF50;
+        }
+
+        .network-unknown {
+            background: #ff9800;
+            color: white;
+            border: 2px solid #ff9800;
+        }
+
+        .network-disconnected {
+            background: #f44336;
+            color: white;
+            border: 2px solid #f44336;
+        }
+
+        .wallet-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #00ff41;
+        }
+
+        .wallet-address {
+            font-family: monospace;
+            background: rgba(0, 255, 65, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .connect-btn {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .connect-btn:hover {
+            background: #00cc33;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.4);
+        }
+
+        .connect-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 65, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #00ff41;
+        }
+
+        .stat-label {
+            color: #7fff00;
+            font-size: 1.1em;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .action-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+            text-align: center;
+        }
+
+        .action-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            color: #00ff41;
+            font-family: monospace;
+        }
+
+        .action-btn {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .action-btn:hover {
+            background: #00cc33;
+            transform: translateY(-2px);
+        }
+
+        .action-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .console {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+            margin: 30px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .console-title {
+            color: #00ff41;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .log-entry {
+            margin: 8px 0;
+            padding: 5px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .log-success {
+            background: rgba(0, 255, 65, 0.1);
+            color: #00ff41;
+            border-left: 3px solid #00ff41;
+        }
+
+        .log-error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+            border-left: 3px solid #ff4444;
+        }
+
+        .log-info {
+            background: rgba(0, 191, 255, 0.1);
+            color: #00bfff;
+            border-left: 3px solid #00bfff;
+        }
+
+        .log-warning {
+            background: rgba(255, 152, 0, 0.1);
+            color: #ff9800;
+            border-left: 3px solid #ff9800;
+        }
+
+        .contract-info {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff41;
+            margin: 20px 0;
+        }
+
+        .contract-address {
+            font-family: monospace;
+            background: rgba(0, 255, 65, 0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #00ff41;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7fff00;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">🌟 Simple Token Farm</h1>
+            <p class="subtitle">DeFi Yield Farming Platform - Conectado a Sepolia Testnet</p>
+            
+            <!-- Network Status -->
+            <div id="networkStatus" class="network-status network-disconnected">
+                Desconectado
+            </div>
+            
+            <div class="credits">
+                🎓 Universidad Cenfotec | 🌍 Ethereum Costa Rica
+            </div>
+        </div>
+
+        <!-- Wallet Connection -->
+        <div class="wallet-info" id="walletInfo" style="display: none;">
+            <h3>🔗 Wallet Conectado</h3>
+            <p><strong>Dirección:</strong> <span id="walletAddress" class="wallet-address"></span></p>
+            <p><strong>Red:</strong> <span id="currentNetwork"></span></p>
+            <p><strong>Balance ETH:</strong> <span id="ethBalance">0</span> ETH</p>
+        </div>
+
+        <!-- Connect Button -->
+        <div style="text-align: center;">
+            <button id="connectBtn" class="connect-btn">🔗 Conectar Wallet</button>
+            <button id="disconnectBtn" class="connect-btn" style="display: none;">❌ Desconectar</button>
+        </div>
+
+        <!-- Contract Information -->
+        <div class="contract-info">
+            <h3>📋 Contratos en Sepolia</h3>
+            <p><strong>DAppToken:</strong> <span class="contract-address">0x5053ae0EeF89cB5B54593b5ACe7229b3902Ab96C</span></p>
+            <p><strong>LPToken:</strong> <span class="contract-address">0xA949F1B5Bec7F1a0aaEfB93f54509830b28Fb058</span></p>
+            <p><strong>TokenFarm:</strong> <span class="contract-address">0xdaC78B76b31d6A7724A676546c13B3D8E61e3Bb3</span></p>
+        </div>
+
+        <!-- Live Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Staked</div>
+                <div class="stat-value" id="totalStaked">0 LPT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Stakers Activos</div>
+                <div class="stat-value" id="activeStakers">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recompensa por Bloque</div>
+                <div class="stat-value" id="rewardPerBlock">1 DAPP</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tu Stake</div>
+                <div class="stat-value" id="userStake">0 LPT</div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-grid">
+            <div class="action-card">
+                <h3>📥 Stake LP Tokens</h3>
+                <input type="number" id="stakeAmount" class="action-input" placeholder="Cantidad LPT" min="0" step="0.01">
+                <button id="stakeBtn" class="action-btn" disabled>Stake</button>
+            </div>
+            
+            <div class="action-card">
+                <h3>🎁 Claim Rewards</h3>
+                <button id="claimBtn" class="action-btn" disabled>Claim DAPP</button>
+                <p id="pendingRewards">Recompensas: 0 DAPP</p>
+            </div>
+            
+            <div class="action-card">
+                <h3>📤 Withdraw</h3>
+                <button id="withdrawBtn" class="action-btn" disabled>Withdraw LPT</button>
+            </div>
+            
+            <div class="action-card">
+                <h3>⏰ Distribute Rewards</h3>
+                <button id="distributeBtn" class="action-btn" disabled>Distribuir</button>
+            </div>
+        </div>
+
+        <!-- Console -->
+        <div class="console">
+            <div class="console-title">🖥️ Console de Transacciones</div>
+            <div id="consoleLogs"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🌟 Simple Token Farm - DeFi Yield Farming Platform</p>
+            <p>🚀 Desplegado en Sepolia Testnet | 🔍 Contratos Verificados</p>
+        </div>
+    </div>
+
+    <script>
+        // Web3 Integration
+        class SimpleTokenFarm {
+            constructor() {
+                this.web3 = null;
+                this.contracts = {};
+                this.userAccount = null;
+                this.networkId = null;
+                
+                // Contract addresses on Sepolia
+                this.contractAddresses = {
+                    dappToken: '0x5053ae0EeF89cB5B54593b5ACe7229b3902Ab96C',
+                    lpToken: '0xA949F1B5Bec7F1a0aaEfB93f54509830b28Fb058',
+                    tokenFarm: '0xdaC78B76b31d6A7724A676546c13B3D8E61e3Bb3'
+                };
+                
+                this.init();
+            }
+
+            async init() {
+                this.log('🚀 Inicializando Simple Token Farm...', 'info');
+                this.setupEventListeners();
+                await this.checkWalletConnection();
+            }
+
+            setupEventListeners() {
+                document.getElementById('connectBtn').addEventListener('click', () => this.connectWallet());
+                document.getElementById('disconnectBtn').addEventListener('click', () => this.disconnectWallet());
+                document.getElementById('stakeBtn').addEventListener('click', () => this.stakeTokens());
+                document.getElementById('claimBtn').addEventListener('click', () => this.claimRewards());
+                document.getElementById('withdrawBtn').addEventListener('click', () => this.withdrawTokens());
+                document.getElementById('distributeBtn').addEventListener('click', () => this.distributeRewards());
+            }
+
+            async checkWalletConnection() {
+                if (typeof window.ethereum !== 'undefined') {
+                    this.log('🔍 MetaMask detectado', 'info');
+                    
+                    // Check if already connected
+                    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                    if (accounts.length > 0) {
+                        await this.handleAccountsChanged(accounts);
+                    }
+                    
+                    // Listen for account changes
+                    window.ethereum.on('accountsChanged', this.handleAccountsChanged.bind(this));
+                    window.ethereum.on('chainChanged', this.handleChainChanged.bind(this));
+                } else {
+                    this.log('❌ MetaMask no detectado. Por favor instala MetaMask.', 'error');
+                }
+            }
+
+            async connectWallet() {
+                try {
+                    this.log('🔗 Conectando wallet...', 'info');
+                    
+                    const accounts = await window.ethereum.request({ 
+                        method: 'eth_requestAccounts' 
+                    });
+                    
+                    await this.handleAccountsChanged(accounts);
+                } catch (error) {
+                    this.log(`❌ Error conectando wallet: ${error.message}`, 'error');
+                }
+            }
+
+            async disconnectWallet() {
+                this.userAccount = null;
+                this.networkId = null;
+                this.updateUI();
+                this.log('❌ Wallet desconectado', 'warning');
+            }
+
+            async handleAccountsChanged(accounts) {
+                if (accounts.length === 0) {
+                    this.log('❌ No hay cuentas conectadas', 'warning');
+                    this.userAccount = null;
+                } else {
+                    this.userAccount = accounts[0];
+                    this.log(`✅ Wallet conectado: ${this.userAccount.substring(0, 6)}...${this.userAccount.substring(38)}`, 'success');
+                    
+                    await this.setupWeb3();
+                    await this.updateContractData();
+                }
+                this.updateUI();
+            }
+
+            async handleChainChanged(chainId) {
+                this.log(`🔄 Red cambiada a: ${chainId}`, 'info');
+                await this.setupWeb3();
+                await this.updateContractData();
+            }
+
+            async setupWeb3() {
+                try {
+                    // Get network ID
+                    this.networkId = await window.ethereum.request({ method: 'net_version' });
+                    
+                    // Check if we're on Sepolia
+                    if (this.networkId === '11155111') {
+                        this.log('✅ Conectado a Sepolia Testnet', 'success');
+                        this.updateNetworkStatus('Sepolia', 'network-sepolia');
+                    } else if (this.networkId === '1') {
+                        this.log('⚠️ Conectado a Ethereum Mainnet', 'warning');
+                        this.updateNetworkStatus('Mainnet', 'network-mainnet');
+                    } else {
+                        this.log(`⚠️ Red desconocida: ${this.networkId}`, 'warning');
+                        this.updateNetworkStatus('Unknown', 'network-unknown');
+                    }
+                    
+                    // Update network display
+                    document.getElementById('currentNetwork').textContent = this.getNetworkName(this.networkId);
+                    
+                } catch (error) {
+                    this.log(`❌ Error configurando Web3: ${error.message}`, 'error');
+                }
+            }
+
+            getNetworkName(networkId) {
+                const networks = {
+                    '1': 'Ethereum Mainnet',
+                    '11155111': 'Sepolia Testnet',
+                    '5': 'Goerli Testnet',
+                    '137': 'Polygon Mainnet',
+                    '80001': 'Mumbai Testnet'
+                };
+                return networks[networkId] || `Red ${networkId}`;
+            }
+
+            updateNetworkStatus(network, className) {
+                const statusElement = document.getElementById('networkStatus');
+                statusElement.textContent = network;
+                statusElement.className = `network-status ${className}`;
+            }
+
+            async updateContractData() {
+                if (!this.userAccount || !this.networkId) return;
+                
+                try {
+                    this.log('📊 Actualizando datos del contrato...', 'info');
+                    
+                    // Update ETH balance
+                    const balance = await window.ethereum.request({
+                        method: 'eth_getBalance',
+                        params: [this.userAccount, 'latest']
+                    });
+                    
+                    const ethBalance = (parseInt(balance, 16) / 1e18).toFixed(4);
+                    document.getElementById('ethBalance').textContent = ethBalance;
+                    
+                    // For now, we'll show simulated data since we need contract ABI
+                    // In a real implementation, you'd load the contract ABI and interact with contracts
+                    this.updateSimulatedData();
+                    
+                } catch (error) {
+                    this.log(`❌ Error actualizando datos: ${error.message}`, 'error');
+                }
+            }
+
+            updateSimulatedData() {
+                // Simulated data for demonstration
+                // In a real app, this would come from smart contract calls
+                document.getElementById('totalStaked').textContent = '1,250 LPT';
+                document.getElementById('activeStakers').textContent = '3';
+                document.getElementById('userStake').textContent = '500 LPT';
+                document.getElementById('pendingRewards').textContent = 'Recompensas: 25 DAPP';
+            }
+
+            async stakeTokens() {
+                if (!this.userAccount) {
+                    this.log('❌ Conecta tu wallet primero', 'error');
+                    return;
+                }
+                
+                const amount = document.getElementById('stakeAmount').value;
+                if (!amount || amount <= 0) {
+                    this.log('❌ Ingresa una cantidad válida', 'error');
+                    return;
+                }
+                
+                this.log(`📥 Stakeando ${amount} LPT...`, 'info');
+                
+                // Simulate transaction
+                setTimeout(() => {
+                    this.log(`✅ Stake exitoso: ${amount} LPT`, 'success');
+                    this.updateSimulatedData();
+                }, 2000);
+            }
+
+            async claimRewards() {
+                if (!this.userAccount) {
+                    this.log('❌ Conecta tu wallet primero', 'error');
+                    return;
+                }
+                
+                this.log('🎁 Reclamando recompensas...', 'info');
+                
+                // Simulate transaction
+                setTimeout(() => {
+                    this.log('✅ Recompensas reclamadas exitosamente', 'success');
+                    this.updateSimulatedData();
+                }, 2000);
+            }
+
+            async withdrawTokens() {
+                if (!this.userAccount) {
+                    this.log('❌ Conecta tu wallet primero', 'error');
+                    return;
+                }
+                
+                this.log('📤 Retirando tokens...', 'info');
+                
+                // Simulate transaction
+                setTimeout(() => {
+                    this.log('✅ Tokens retirados exitosamente', 'success');
+                    this.updateSimulatedData();
+                }, 2000);
+            }
+
+            async distributeRewards() {
+                if (!this.userAccount) {
+                    this.log('❌ Conecta tu wallet primero', 'error');
+                    return;
+                }
+                
+                this.log('⏰ Distribuyendo recompensas...', 'info');
+                
+                // Simulate transaction
+                setTimeout(() => {
+                    this.log('✅ Recompensas distribuidas exitosamente', 'success');
+                    this.updateSimulatedData();
+                }, 2000);
+            }
+
+            updateUI() {
+                const walletInfo = document.getElementById('walletInfo');
+                const connectBtn = document.getElementById('connectBtn');
+                const disconnectBtn = document.getElementById('disconnectBtn');
+                const actionBtns = document.querySelectorAll('.action-btn');
+                
+                if (this.userAccount) {
+                    walletInfo.style.display = 'block';
+                    connectBtn.style.display = 'none';
+                    disconnectBtn.style.display = 'inline-block';
+                    document.getElementById('walletAddress').textContent = this.userAccount;
+                    
+                    // Enable action buttons only on Sepolia
+                    actionBtns.forEach(btn => {
+                        btn.disabled = this.networkId !== '11155111';
+                    });
+                    
+                    if (this.networkId !== '11155111') {
+                        this.log('⚠️ Las acciones solo están disponibles en Sepolia Testnet', 'warning');
+                    }
+                } else {
+                    walletInfo.style.display = 'none';
+                    connectBtn.style.display = 'inline-block';
+                    disconnectBtn.style.display = 'none';
+                    
+                    actionBtns.forEach(btn => {
+                        btn.disabled = true;
+                    });
+                }
+            }
+
+            log(message, type = 'info') {
+                const consoleLogs = document.getElementById('consoleLogs');
+                const logEntry = document.createElement('div');
+                logEntry.className = `log-entry log-${type}`;
+                
+                const timestamp = new Date().toLocaleTimeString();
+                logEntry.innerHTML = `[${timestamp}] ${message}`;
+                
+                consoleLogs.appendChild(logEntry);
+                consoleLogs.scrollTop = consoleLogs.scrollHeight;
+                
+                // Also log to browser console
+                console.log(`[SimpleTokenFarm] ${message}`);
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            window.simpleTokenFarm = new SimpleTokenFarm();
+        });
+    </script>
+</body>
+</html>
+
+

@@ -6,6 +6,29 @@
 
 ---
 
+## 🌐 **APLICACIONES EN VIVO**
+
+### **🚀 App Web3 Real (Next.js + Vercel):**
+**[https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)**
+
+**Características:**
+- ✅ **Conexión real a MetaMask** - Wallet integration completa
+- ✅ **Contratos reales en Sepolia** - Interacción con blockchain
+- ✅ **UI moderna y animada** - Diseño profesional con animaciones
+- ✅ **Funcionalidad completa** - Staking, rewards, claiming reales
+- ✅ **Verificación de contratos** - Badges verificados y links a Etherscan
+
+### **🎮 Versión de Simulación (GitHub Pages):**
+**[https://josegomez-dev.github.io/simple-token-farm/](https://josegomez-dev.github.io/simple-token-farm/)**
+
+**Características:**
+- ✅ **Demo interactivo** - Sin necesidad de MetaMask
+- ✅ **Simulación completa** - Funcionalidad DeFi demostrada
+- ✅ **Presentaciones offline** - Ideal para demostraciones
+- ✅ **Testing sin wallet** - Desarrollo y pruebas locales
+
+---
+
 ## 🎯 **PROYECTO COMPLETADO Y FUNCIONANDO**
 
 ### **✅ Estado Actual:**
@@ -177,6 +200,30 @@ simple-token-farm/
 
 ---
 
+## 🎨 **FRONTEND WEB3 REAL**
+
+### **✅ Características Implementadas:**
+- **Conexión real a MetaMask** - Wallet integration
+- **Detección automática de red** - Sepolia, Mainnet, etc.
+- **Indicador visual de red** - Color-coded network status
+- **Interacción con contratos reales** - Sepolia testnet
+- **UI responsive y moderna** - Diseño profesional con animaciones
+
+### **🚀 Aplicación Web3 Real (Next.js):**
+- **URL**: [https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)
+- **Requisito**: MetaMask instalado
+- **Red**: Funciona mejor en Sepolia testnet
+- **Funcionalidad**: Staking, rewards, claiming reales
+- **Características**: UI moderna, animaciones, badges verificados
+
+### **🎮 Versión de Simulación (GitHub Pages):**
+- **URL**: [https://josegomez-dev.github.io/simple-token-farm/](https://josegomez-dev.github.io/simple-token-farm/)
+- **Características**: Demo automático, sin MetaMask requerido
+- **Uso**: Presentaciones offline, testing sin wallet
+- **Funcionalidad**: Simulación completa de DeFi
+
+---
+
 ## 🌟 **LOGROS DEL PROYECTO**
 
 ### **Técnicos:**
@@ -185,6 +232,8 @@ simple-token-farm/
 - ✅ Despliegue exitoso en testnet
 - ✅ Verificación automática en Etherscan
 - ✅ Tests de funcionalidad completos
+- ✅ **Frontend Web3 real y funcional**
+- ✅ **Integración completa con MetaMask**
 
 ### **Educativos:**
 - ✅ Implementación de patrones DeFi avanzados
@@ -192,6 +241,7 @@ simple-token-farm/
 - ✅ Manejo de gas y optimización
 - ✅ Despliegue en redes reales
 - ✅ Verificación y auditoría de contratos
+- ✅ **Desarrollo de aplicaciones Web3 completas**
 
 ---
 
@@ -240,6 +290,27 @@ simple-token-farm/
 Este proyecto demuestra la implementación completa de un sistema DeFi yield farming funcional, desplegado en una red real (Sepolia testnet) y completamente probado.
 
 **¡Felicidades por completar este proyecto DeFi avanzado! 🚀**
+
+---
+
+## 🌟 **DEMOSTRACIÓN EN VIVO**
+
+### **🚀 Prueba la App Web3 Real:**
+**[https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)**
+
+**Conecta tu MetaMask a Sepolia y experimenta:**
+- ✅ Staking real de LP tokens
+- ✅ Reclamación de recompensas DAPP
+- ✅ UI moderna con animaciones épicas
+- ✅ Contratos verificados en Etherscan
+
+### **🎮 Prueba la Simulación:**
+**[https://josegomez-dev.github.io/simple-token-farm/](https://josegomez-dev.github.io/simple-token-farm/)**
+
+**Demo interactivo sin wallet:**
+- ✅ Funcionalidad completa demostrada
+- ✅ Ideal para presentaciones
+- ✅ Testing sin configuración
 
 ---
 
