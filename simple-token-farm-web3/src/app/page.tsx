@@ -360,37 +360,80 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Network Status with Animation */}
-        {networkId && (
-          <div className={`inline-block px-6 py-3 rounded-full text-white font-bold mb-8 ${getNetworkColor(networkId)} shadow-lg transform hover:scale-105 transition-all duration-300 animate-fade-in-up`}>
-            <span className="mr-2">🌐</span>
-            {getNetworkName(networkId)}
-          </div>
-        )}
-
-        {/* Wallet Connection with Hover Effects */}
-        <div className="text-center mb-12">
-          {!isConnected ? (
-            <button
-              onClick={connectWallet}
-              disabled={loading}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-600 px-10 py-4 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl disabled:transform-none shadow-lg animate-pulse"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
-                  🔄 Connecting...
-                </span>
+        {/* Enhanced Header with Wallet, Network & Tech Stack */}
+        <div className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 rounded-2xl p-8 mb-12 shadow-2xl transform hover:scale-105 transition-all duration-500">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            
+            {/* Wallet Connection Section */}
+            <div className="text-center lg:text-left">
+              <h3 className="text-xl font-bold mb-4 text-blue-300 flex items-center justify-center lg:justify-start">
+                <span className="mr-2">🔗</span>
+                Wallet Status
+              </h3>
+              {!isConnected ? (
+                <button
+                  onClick={connectWallet}
+                  disabled={loading}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-600 px-6 py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl disabled:transform-none shadow-lg animate-pulse"
+                >
+                  {loading ? (
+                    <span className="flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      🔄 Connecting...
+                    </span>
+                  ) : (
+                    '🔗 Connect Wallet'
+                  )}
+                </button>
               ) : (
-                '🔗 Connect Wallet'
+                <div className="bg-gradient-to-r from-green-800 to-green-700 rounded-lg p-4 inline-block shadow-lg transform hover:scale-105 transition-all duration-300">
+                  <p className="text-sm text-green-200 mb-2">✅ Wallet Connected</p>
+                  <p className="font-mono text-green-300 text-lg">{account.substring(0, 6)}...{account.substring(38)}</p>
+                </div>
               )}
-            </button>
-          ) : (
-            <div className="bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-6 inline-block shadow-lg transform hover:scale-105 transition-all duration-300">
-              <p className="text-sm text-gray-400 mb-2">✅ Wallet Connected</p>
-              <p className="font-mono text-blue-400 text-lg">{account.substring(0, 6)}...{account.substring(38)}</p>
             </div>
-          )}
+
+            {/* Network Status Section */}
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4 text-purple-300 flex items-center justify-center">
+                <span className="mr-2">🌐</span>
+                Network Status
+              </h3>
+              {networkId ? (
+                <div className={`inline-block px-6 py-3 rounded-full text-white font-bold shadow-lg transform hover:scale-105 transition-all duration-300 animate-fade-in-up ${getNetworkColor(networkId)}`}>
+                  <span className="mr-2">🌐</span>
+                  {getNetworkName(networkId)}
+                </div>
+              ) : (
+                <div className="bg-gray-600 px-6 py-3 rounded-full text-white font-bold shadow-lg">
+                  <span className="mr-2">⏳</span>
+                  Detecting Network...
+                </div>
+              )}
+            </div>
+
+            {/* Tech Stack Section */}
+            <div className="text-center lg:text-right">
+              <h3 className="text-xl font-bold mb-4 text-cyan-300 flex items-center justify-center lg:justify-end">
+                <span className="mr-2">⚡</span>
+                Tech Stack
+              </h3>
+              <div className="flex flex-wrap justify-center lg:justify-end gap-2">
+                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                  🔷 Solidity 0.8.22
+                </span>
+                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                  ⚛️ Next.js 15
+                </span>
+                <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                  🔗 Ethers.js v6
+                </span>
+                <span className="bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                  🦊 MetaMask
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Contract Info with Verified Badges and Etherscan Links */}
@@ -578,35 +621,39 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Footer with Epic Style */}
-        <div className="text-center mt-16 text-gray-400 animate-fade-in-up animation-delay-800">
-          <div className="mb-4">
-            <span className="text-2xl">🌟</span>
-            <span className="text-xl font-bold mx-4">Simple Token Farm - Web3 Real</span>
-            <span className="text-2xl">🌟</span>
-          </div>
-          <div className="text-lg">
-            <span className="mr-4">🚀 Deployed on Vercel</span>
-            <span className="mx-4">🔍 Contracts on Sepolia</span>
-            <span className="ml-4">⚡ Built with Solidity</span>
-          </div>
-          
-          {/* Tech Stack Badges */}
-          <div className="mt-6 flex justify-center space-x-4">
-            <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-              🔷 Solidity 0.8.22
-            </span>
-            <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-              ⚛️ Next.js 15
-            </span>
-            <span className="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-              🔗 Ethers.js v6
-            </span>
-            <span className="bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-              🦊 MetaMask
-            </span>
-          </div>
-        </div>
+                 {/* Footer with Epic Style */}
+         <div className="text-center mt-16 text-gray-400 animate-fade-in-up animation-delay-800">
+           <div className="mb-4">
+             <span className="text-2xl">🌟</span>
+             <span className="text-xl font-bold mx-4">Simple Token Farm - Web3 Real</span>
+             <span className="text-2xl">🌟</span>
+           </div>
+           <div className="text-lg">
+             <span className="mr-4">🚀 Deployed on Vercel</span>
+             <span className="mx-4">🔍 Contracts on Sepolia</span>
+             <span className="ml-4">⚡ Built with Solidity</span>
+           </div>
+           
+           {/* Project Links */}
+           <div className="mt-6 flex justify-center space-x-4">
+             <a 
+               href="https://josegomez-dev.github.io/simple-token-farm/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+             >
+               🎮 Demo Simulation
+             </a>
+             <a 
+               href="https://github.com/josegomez-dev/simple-token-farm" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-4 py-2 rounded-full text-sm font-bold hover:from-gray-700 hover:to-gray-800 transition-all duration-300 transform hover:scale-105"
+             >
+               📚 Source Code
+             </a>
+           </div>
+         </div>
       </div>
 
       {/* Custom CSS for animations */}

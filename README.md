@@ -296,7 +296,7 @@ Este proyecto demuestra la implementación completa de un sistema DeFi yield far
 ## 🌟 **DEMOSTRACIÓN EN VIVO**
 
 ### **🚀 Prueba la App Web3 Real:**
-**[https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)**
+**[https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.app/](https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.app/)**
 
 **Conecta tu MetaMask a Sepolia y experimenta:**
 - ✅ Staking real de LP tokens
