@@ -9,7 +9,7 @@
 ## 🌐 **APLICACIONES EN VIVO**
 
 ### **🚀 App Web3 Real (Next.js + Vercel):**
-**[https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)**
+**[https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.appvercel.app](https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.app)**
 
 **Características:**
 - ✅ **Conexión real a MetaMask** - Wallet integration completa
@@ -210,7 +210,7 @@ simple-token-farm/
 - **UI responsive y moderna** - Diseño profesional con animaciones
 
 ### **🚀 Aplicación Web3 Real (Next.js):**
-- **URL**: [https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-kce3uj4rf-josegomezdev-projects.vercel.app)
+- **URL**: [https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.app](https://simple-token-farm-web3-pvof5snke-josegomezdev-projects.vercel.app)
 - **Requisito**: MetaMask instalado
 - **Red**: Funciona mejor en Sepolia testnet
 - **Funcionalidad**: Staking, rewards, claiming reales
