@@ -1,395 +1,252 @@
 # 🌟 **SIMPLE TOKEN FARM** 🌟
-## 🚀 **DeFi Yield Farming Revolution** 🚀
 
-> *"In the vast expanse of the blockchain universe, where smart contracts dance with digital assets, emerges a beacon of innovation - the Simple Token Farm. A testament to the power of proportional rewards, upgradeable architecture, and gas-efficient scaling."* 🪐
+## 🚀 **DeFi Yield Farming Platform - Desplegado en Sepolia Testnet**
 
----
-
-## 🏆 **EXAMEN FINAL - CURSO DE SOLIDITY** 🏆
-
-### **🎓 Estudiante:** Jose Alejandro Gomez Castro
-### **📚 Curso:** Solidity & Smart Contract Development
-### **🎯 Objetivo:** Implementación completa de DeFi Yield Farming
-### **⭐ Calificación Objetivo:** 100% + Bonus Extras
+> **Advanced DeFi Yield Farming with proportional rewards, upgradeable contracts, and gas-efficient factory patterns**
 
 ---
 
-## 🌌 **COSMOS DEL PROYECTO**
+## 🎯 **PROYECTO COMPLETADO Y FUNCIONANDO**
 
-```
-                    🌟 SIMPLE TOKEN FARM 🌟
-                           |
-                    ┌──────┴──────┐
-                    │             │
-                🏭 V1         🔄 V2
-            Factory+Clones   Proxy Upgradeable
-                │             │
-            🚀 Escalabilidad  🚀 Evolución
-```
+### **✅ Estado Actual:**
+- **Contratos desplegados** en Sepolia testnet
+- **Verificados** en Etherscan
+- **Funcionalidad completa** probada y funcionando
+- **Scripts optimizados** para despliegue y verificación
 
 ---
 
-## 🎯 **MISIÓN COMPLETADA: 100% SUCCESS** ✅
+## 🏗️ **ARQUITECTURA DEL PROYECTO**
 
-### **🔥 REQUISITOS BÁSICOS (5/5)**
-- ✅ **`deposit()`** - Stake de tokens LP con precisión matemática
-- ✅ **`claimRewards()`** - Reclamación de recompensas proporcionales
-- ✅ **`withdraw()`** - Retiro completo manteniendo rewards pendientes
-- ✅ **`distributeRewardsAll()`** - Distribución owner-triggered
-- ✅ **Recompensas Proporcionales** - Algoritmo matemático perfecto
+### **Contratos Principales:**
+- **`DAppToken.sol`** - Token de recompensa (ERC20)
+- **`LPToken.sol`** - Token de staking (ERC20)  
+- **`TokenFarm.sol`** - Lógica principal de yield farming
 
-### **🏆 BONUS IMPLEMENTADOS (5/5)**
-- ✅ **Bonus 1: Modifiers** - `onlyOwner()` & `onlyStaker()`
-- ✅ **Bonus 2: Struct** - `struct User` unificando mappings
-- ✅ **Bonus 3: Tests** - 5/5 escenarios pasando perfectamente
-- ✅ **Bonus 4: Recompensas Variables** - Rango configurable
-- ✅ **Bonus 5: Claim Fees** - Sistema de comisiones en bps
-
-### **🚀 BONUS 6: ARQUITECTURA AVANZADA**
-- 🏭 **V1: Factory + Clones** - EIP-1167 Minimal Proxy
-- 🔄 **V2: Proxy Upgradeable** - UUPS Pattern para evolución
+### **Características Implementadas:**
+- ✅ **Staking proporcional** con recompensas por bloque
+- ✅ **Modificadores de acceso** (onlyOwner, onlyStaker)
+- ✅ **Structs para datos de usuario** consolidados
+- ✅ **Recompensas configurables** por bloque
+- ✅ **Sistema de fees** en reclamaciones
+- ✅ **Distribución automática** de recompensas
 
 ---
 
-## 🧠 **ARQUITECTURA TÉCNICA AVANZADA**
+## 🚀 **DESPLIEGUE RÁPIDO EN SEPOLIA**
 
-### **🔬 Smart Contract Architecture**
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    TOKEN FARM ECOSYSTEM                     │
-├─────────────────────────────────────────────────────────────┤
-│  📜 DAppToken (ERC20)  │  📜 LPToken (ERC20)              │
-│  🎯 Reward Token       │  🏦 Staking Token                 │
-│  💎 Symbol: DAPP       │  💎 Symbol: LPT                   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                    ┌─────────┴─────────┐
-                    │    TOKEN FARM     │
-                    │  🧠 Core Logic    │
-                    │  ⚡ Gas Optimized │
-                    │  🔒 Security First│
-                    └───────────────────┘
-                              │
-                    ┌─────────┴─────────┐
-                    │   🏭 V1 Factory   │  🔄 V2 Proxy
-                    │   Clones Pattern  │  Upgradeable
-                    │   ~45k gas/farm   │  State Preserved
-                    └───────────────────┘
-```
+### **Prerrequisitos:**
+- Node.js 18+ y npm
+- Wallet con ETH de Sepolia (mínimo 0.01 ETH)
+- Cuenta en Infura/Alchemy para RPC
+- API key de Etherscan
 
-### **⚡ Gas Optimization Analysis**
-| Operation | Gas Used | Optimization |
-|-----------|----------|--------------|
-| **Deploy TokenFarm** | 2,268,270 | Base Implementation |
-| **Deposit** | 166,728 | Efficient State Updates |
-| **Claim Rewards** | 88,110 | Minimal Storage Reads |
-| **Distribute Rewards** | 77,019 | Batch Processing |
-| **V1 Clone Creation** | ~45,000 | **97.75% Gas Savings** |
-
----
-
-## 🌟 **INNOVACIONES TÉCNICAS IMPLEMENTADAS**
-
-### **🎯 1. PROPORTIONAL REWARD ALGORITHM**
-```solidity
-// Mathematical precision for proportional rewards
-uint256 amount = (userStakingBalance * rewardPerBlock * blocksPassed) / totalStakingBalance;
-```
-**Innovación:** Exclusión del bloque actual para determinismo en tests
-
-### **🎯 2. STRUCT-BASED USER MANAGEMENT**
-```solidity
-struct User {
-    uint256 stakingBalance;    // LP tokens staked
-    uint256 pendingRewards;    // Accumulated rewards
-    bool hasStaked;           // Historical flag
-    bool isStaking;           // Active status
-}
-```
-**Innovación:** Unificación de 5 mappings en 1 struct optimizado
-
-### **🎯 3. CONFIGURABLE REWARD RANGES**
-```solidity
-uint256 public minRewardPerBlock;
-uint256 public maxRewardPerBlock;
-uint256 public rewardPerBlock;
-```
-**Innovación:** Sistema de rangos con validación automática
-
-### **🎯 4. BASIS POINTS FEE SYSTEM**
-```solidity
-uint16 public claimFeeBps;    // 100 bps = 1%
-uint256 fee = (pendingAmount * claimFeeBps) / 10_000;
-```
-**Innovación:** Sistema de fees profesional con precisión de 0.01%
-
----
-
-## 🚀 **BONUS 6: ARQUITECTURAS AVANZADAS**
-
-### **🏭 V1: FACTORY + CLONES PATTERN**
-**Problema Resuelto:** Escalabilidad de múltiples farms
-**Solución:** EIP-1167 Minimal Proxy
-**Resultado:** 97.75% ahorro de gas por farm
-
-```solidity
-// Gas-efficient farm creation
-address farm = Clones.clone(address(implementation));
-TokenFarm(farm).initialize(dappToken, lpToken, rewardPerBlock, owner);
-```
-
-### **🔄 V2: PROXY UPGRADEABLE PATTERN**
-**Problema Resuelto:** Evolución de contratos sin perder estado
-**Solución:** UUPS Proxy Pattern
-**Resultado:** Upgrade de V1 a V2 con fees preservando stakes
-
-```solidity
-// Upgradeable architecture
-contract TokenFarmV2 is TokenFarmV1 {
-    uint16 public claimFeeBps;
-    address public feeRecipient;
-    
-    function setClaimFee(uint16 _bps, address _recipient) external onlyOwner;
-}
-```
-
----
-
-## 🧪 **TESTING SUITE PROFESIONAL**
-
-### **📊 Test Coverage: 100%**
-```
-🧪 Simple Token Farm Tests
-├── ✅ Mint LP y deposit
-├── ✅ Distribución proporcional y claim
-├── ✅ Withdraw con rewards pendientes
-├── ✅ Fee system y retiro de fees
-└── ✅ Configuración de reward ranges
-
-🎯 Resultado: 5/5 Tests PASSING ✅
-⏱️  Tiempo: 1 segundo
-📈 Gas Report: Incluido
-```
-
-### **🔬 Test Scenarios Implementados**
-1. **Staking Flow** - Complete user journey
-2. **Reward Distribution** - Mathematical accuracy verification
-3. **Fee Management** - Professional fee system testing
-4. **Configuration** - Owner privilege validation
-5. **Edge Cases** - Boundary condition handling
-
----
-
-## 🌐 **WEB3 INTEGRATION & DEPLOYMENT**
-
-### **🔗 Network Compatibility**
-- ✅ **Hardhat Network** - Development & Testing
-- ✅ **Ethereum Mainnet** - Production Ready
-- ✅ **Polygon** - L2 Scaling Solution
-- ✅ **BSC** - Binance Smart Chain
-- ✅ **Arbitrum** - L2 Rollup
-
-### **🚀 Deployment Scripts**
+### **1. Configuración Inicial:**
 ```bash
-# Local Development
-npx hardhat run scripts/deploy.js
+# Clonar repositorio
+git clone <your-repo-url>
+cd simple-token-farm
 
-# Test Network
-npx hardhat run scripts/deploy.js --network testnet
+# Instalar dependencias
+npm install
 
-# Production
-npx hardhat run scripts/deploy.js --network mainnet
+# Configurar variables de entorno
+cp env.example .env
+nano .env  # Editar con tus valores
 ```
 
----
-
-## 🎨 **USER EXPERIENCE & INTERFACE**
-
-### **👥 User Journey Flow**
-```
-1. 🏦 User approves LP tokens
-2. 📥 User deposits into farm
-3. ⏰ Owner triggers reward distribution
-4. 🎁 User claims proportional rewards
-5. 💸 Optional fee deduction
-6. 🔄 User can withdraw LP anytime
-```
-
-### **🎯 Key Features**
-- **Proportional Rewards** - Fair distribution algorithm
-- **Flexible Staking** - Deposit/withdraw anytime
-- **Fee Management** - Professional fee system
-- **Configuration** - Owner-controlled parameters
-- **Gas Optimization** - Efficient smart contracts
-
----
-
-## 🔒 **SECURITY & AUDIT FEATURES**
-
-### **🛡️ Security Measures Implemented**
-- ✅ **Access Control** - `onlyOwner` & `onlyStaker` modifiers
-- ✅ **Input Validation** - Zero address checks
-- ✅ **Overflow Protection** - Solidity 0.8.22 built-in
-- ✅ **Reentrancy Safety** - State changes before external calls
-- ✅ **Fee Limits** - Maximum 20% fee cap
-
-### **🔍 Audit-Ready Features**
-- **Event Logging** - Complete transaction transparency
-- **Error Handling** - Descriptive error messages
-- **Gas Optimization** - Efficient contract execution
-- **Documentation** - NatSpec comments throughout
-- **Testing** - Comprehensive test coverage
-
----
-
-## 📚 **TECHNICAL DOCUMENTATION**
-
-### **📖 Documentation Structure**
-- **README Principal** - Este archivo épico
-- **V1: Factory + Clones** - `/v1/README.md`
-- **V2: Proxy Upgradeable** - `/v2/README.md`
-- **Comparación Bonus 6** - `BONUS_6_COMPARISON.md`
-- **NatSpec Comments** - En todos los contratos
-- **JSDoc** - En scripts y tests
-
-### **🔧 Development Commands**
+### **2. Variables de Entorno (.env):**
 ```bash
-# Compile contracts
+# Tu clave privada (sin 0x)
+PRIVATE_KEY=tu_clave_privada_aqui
+
+# URL RPC de Sepolia
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/TU_PROJECT_ID
+
+# API key de Etherscan
+ETHERSCAN_API_KEY=tu_api_key_aqui
+
+# Habilitar reporte de gas
+REPORT_GAS=true
+```
+
+### **3. Desplegar en Sepolia:**
+```bash
+# Compilar contratos
 npm run compile
 
-# Run tests with gas report
-npm run gas
+# Desplegar en Sepolia
+npm run deploy:sepolia
 
-# Deploy locally
-npm run deploy
+# Verificar automáticamente
+npm run verify:sepolia
 
-# Run coverage
-npm run coverage
+# Probar funcionalidad
+npm run interact:sepolia
 ```
 
 ---
 
-## 🌟 **ACHIEVEMENTS & MILESTONES**
+## 📋 **COMANDOS DISPONIBLES**
 
-### **🏆 Project Completion Status**
-- **✅ Core Requirements** - 100% Complete
-- **✅ Bonus 1-5** - 100% Complete
-- **✅ Bonus 6** - 200% Complete (2 implementations)
-- **✅ Testing** - 100% Coverage
-- **✅ Documentation** - Professional Grade
-- **✅ Gas Optimization** - Production Ready
-
-### **🎯 Innovation Highlights**
-- **Proportional Reward Algorithm** - Mathematical precision
-- **Struct-Based Architecture** - Gas optimization
-- **Configurable Fee System** - Professional implementation
-- **Dual Bonus 6 Solutions** - Comprehensive approach
-- **Production-Ready Code** - Enterprise quality
-
----
-
-## 🚀 **FUTURE ROADMAP & EXTENSIONS**
-
-### **🔮 Phase 2: Advanced Features**
-- **Multi-Token Support** - Different reward tokens
-- **Time-Locked Staking** - Vesting schedules
-- **Governance Integration** - DAO voting
-- **Cross-Chain Bridges** - Multi-chain farming
-- **MEV Protection** - Sandwich attack prevention
-
-### **🌐 Phase 3: Ecosystem Expansion**
-- **Mobile App** - React Native integration
-- **Analytics Dashboard** - Real-time metrics
-- **API Services** - Third-party integrations
-- **Community Features** - Social farming
-- **DeFi Aggregator** - Multi-protocol yield
-
----
-
-## 🎓 **EDUCATIONAL VALUE & LEARNING OUTCOMES**
-
-### **📚 Skills Demonstrated**
-- **Smart Contract Development** - Advanced Solidity patterns
-- **DeFi Architecture** - Yield farming mechanics
-- **Gas Optimization** - Ethereum efficiency
-- **Testing & Security** - Professional practices
-- **Documentation** - Technical writing excellence
-- **Architecture Design** - Scalable solutions
-
-### **🌟 Innovation Showcase**
-- **Problem Solving** - Real DeFi challenges
-- **Technical Excellence** - Production-quality code
-- **Creative Thinking** - Multiple solution approaches
-- **Professional Standards** - Enterprise-level implementation
-
----
-
-## 🏅 **CONCLUSION: EXCELLENCE ACHIEVED**
-
-This project represents the **culmination of advanced Solidity development skills**, demonstrating:
-
-- **🎯 Technical Mastery** - Complete requirement implementation
-- **🚀 Innovation Leadership** - Bonus 6 with dual solutions
-- **🔒 Security Excellence** - Production-ready smart contracts
-- **📚 Documentation Quality** - Professional-grade materials
-- **🧪 Testing Rigor** - 100% coverage and validation
-- **🌟 Future Vision** - Scalable and extensible architecture
-
----
-
-## 📞 **CONTACT & COLLABORATION**
-
-### **👨‍💻 Developer**
-- **Name:** Jose Alejandro Gomez Castro
-- **Project:** Simple Token Farm
-- **Status:** Course Final Project
-- **Quality:** Production-Ready
-
-### **🤝 Open for**
-- **Code Reviews** - Technical feedback
-- **Collaborations** - Open source contributions
-- **Job Opportunities** - Smart contract development
-- **Mentorship** - Junior developer guidance
-
----
-
-## 📄 **LICENSE**
-
+### **Desarrollo Local:**
+```bash
+npm run compile          # Compilar contratos
+npm run test            # Ejecutar tests
+npm run gas             # Reporte de gas
+npm run coverage        # Cobertura de tests
 ```
-MIT License - Open Source Excellence
-Copyright (c) 2024 Jose Alejandro Gomez Castro
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+### **Sepolia Testnet:**
+```bash
+npm run deploy:sepolia  # Desplegar en Sepolia
+npm run verify:sepolia  # Verificar en Etherscan
+npm run interact:sepolia # Probar funcionalidad
 ```
 
 ---
 
-## 🌟 **FINAL WORDS**
+## 🌐 **CONTRATOS DESPLEGADOS EN SEPOLIA**
 
-> *"In the blockchain universe, where code is law and innovation is currency, this Simple Token Farm stands as a testament to technical excellence, creative problem-solving, and the relentless pursuit of DeFi perfection."* 🚀
+### **Direcciones Verificadas:**
+- **DAppToken**: [`0x5053ae0EeF89cB5B54593b5ACe7229b3902Ab96C`](https://sepolia.etherscan.io/address/0x5053ae0EeF89cB5B54593b5ACe7229b3902Ab96C)
+- **LPToken**: [`0xA949F1B5Bec7F1a0aaEfB93f54509830b28Fb058`](https://sepolia.etherscan.io/address/0xA949F1B5Bec7F1a0aaEfB93f54509830b28Fb058)
+- **TokenFarm**: [`0xdaC78B76b31d6A7724A676546c13B3D8E61e3Bb3`](https://sepolia.etherscan.io/address/0xdaC78B76b31d6A7724A676546c13B3D8E61e3Bb3)
+
+### **Configuración:**
+- **Red**: Sepolia Testnet (Chain ID: 11155111)
+- **Recompensa por Bloque**: 1 DAPP
+- **LP Tokens Iniciales**: 10,000 LPT
+- **Gas Price**: Automático (optimizado)
 
 ---
 
-**⭐ Star this repository if you found it helpful! ⭐**
+## 🧪 **FUNCIONALIDAD PROBADA**
 
-**🔗 Share with your network to spread DeFi knowledge! 🔗**
+### **Tests Completados:**
+- ✅ **Aprobación de tokens** - LP tokens aprobados para staking
+- ✅ **Staking** - Depósito de 1000 LP tokens
+- ✅ **Distribución de recompensas** - Sistema de recompensas funcionando
+- ✅ **Reclamación** - Usuarios pueden reclamar recompensas
+- ✅ **Retiro** - Usuarios pueden retirar tokens staked
 
-**🚀 The future of finance is decentralized, and it starts with projects like this! 🚀**
+### **Flujo Completo:**
+1. Usuario aprueba LP tokens para staking
+2. Usuario deposita LP tokens en el farm
+3. Sistema distribuye recompensas proporcionalmente
+4. Usuario reclama recompensas DAPP
+5. Usuario retira LP tokens staked
+
+---
+
+## 🔧 **ESTRUCTURA DEL PROYECTO**
+
+```
+simple-token-farm/
+├── contracts/                 # Smart contracts
+│   ├── DAppToken.sol         # Token de recompensa
+│   ├── LPToken.sol           # Token de staking
+│   └── TokenFarm.sol         # Lógica principal
+├── scripts/                   # Scripts de despliegue
+│   ├── deploy.js             # Despliegue local
+│   ├── deploy-sepolia.js     # Despliegue en Sepolia
+│   ├── verify-sepolia-auto.js # Verificación automática
+│   └── interact-sepolia.js   # Pruebas de interacción
+├── test/                      # Tests unitarios
+├── hardhat.config.js          # Configuración de Hardhat
+├── package.json               # Dependencias y scripts
+├── env.example                # Plantilla de variables de entorno
+└── README.md                  # Este archivo
+```
+
+---
+
+## 🚨 **SOLUCIÓN DE PROBLEMAS**
+
+### **Error: "insufficient funds"**
+- Obtén más ETH de Sepolia: https://sepoliafaucet.com/
+- Verifica que tu `.env` esté configurado correctamente
+
+### **Error: "intrinsic gas too low"**
+- Usa `npm run deploy:sepolia` (gas automático)
+- No especifiques límites de gas manualmente
+
+### **Error: "contract verification failed"**
+- Espera unos minutos después del despliegue
+- Verifica que tu API key de Etherscan sea válida
+
+---
+
+## 🌟 **LOGROS DEL PROYECTO**
+
+### **Técnicos:**
+- ✅ Sistema DeFi completo y funcional
+- ✅ Contratos optimizados y seguros
+- ✅ Despliegue exitoso en testnet
+- ✅ Verificación automática en Etherscan
+- ✅ Tests de funcionalidad completos
+
+### **Educativos:**
+- ✅ Implementación de patrones DeFi avanzados
+- ✅ Uso de OpenZeppelin para seguridad
+- ✅ Manejo de gas y optimización
+- ✅ Despliegue en redes reales
+- ✅ Verificación y auditoría de contratos
+
+---
+
+## 🎓 **CRÉDITOS Y AGRADECIMIENTOS**
+
+### **Instituciones:**
+- **Universidad Cenfotec** - Curso de Solidity y Smart Contracts
+- **Ethereum Costa Rica** - Comunidad local de Ethereum
+
+### **Mentores:**
+- **Robert de Hallos** - Web3 accessibility advocate
+- **Luis de BlockBeasts** - Innovation inspiration
+
+---
+
+## 🚀 **PRÓXIMOS PASOS**
+
+### **Inmediatos:**
+1. **Probar funcionalidad** con múltiples usuarios
+2. **Integrar con frontend** para interfaz web
+3. **Optimizar gas** para mainnet
+
+### **Futuros:**
+1. **Auditoría de seguridad** completa
+2. **Despliegue en mainnet** Ethereum
+3. **Implementación de governance** (DAO)
+4. **Integración con DEX** para LP tokens reales
+
+---
+
+## 📞 **SOPORTE**
+
+### **Documentación:**
+- **Hardhat**: https://hardhat.org/docs
+- **OpenZeppelin**: https://openzeppelin.com/contracts/
+- **Ethereum**: https://ethereum.org/developers/
+
+### **Comunidades:**
+- **Ethereum Costa Rica**: https://ethereumcostarica.org
+- **Hallos Platform**: https://hallos.io
+
+---
+
+## 🎉 **¡PROYECTO COMPLETADO EXITOSAMENTE!**
+
+Este proyecto demuestra la implementación completa de un sistema DeFi yield farming funcional, desplegado en una red real (Sepolia testnet) y completamente probado.
+
+**¡Felicidades por completar este proyecto DeFi avanzado! 🚀**
+
+---
+
+**Author**: Jose Alejandro Gomez Castro  
+**Project**: Simple Token Farm  
+**Status**: ✅ Completado y Funcionando  
+**Network**: Sepolia Testnet  
+**Date**: 2025
 
 
